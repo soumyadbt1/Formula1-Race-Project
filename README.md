@@ -44,12 +44,12 @@ This project showcases the integration of Azure services to build a scalable, ef
 ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/architecture.jpg)
 
 #### STEPS FOLLOWED : 
-1. First uploaded raw csv and json files to raw container, basically 3 folders each containing race details of history and particular dates.
+1. First uploaded raw csv and json files to raw container, basically 3 folders each containing race details of history and particular dates.**
    
    ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/raw_container_incremental_files.JPG)
 
-2. Preparation for Ingestion of data :
-    
+2. Preparation for Ingestion of data.
+   
     1) Created Mount Points in Databricks to Connect to ADLSg2 containers, below is the code and snapshots :
        
        https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Code/8.%20mount_adls_containers_for_project.ipynb
@@ -130,7 +130,17 @@ This project showcases the integration of Azure services to build a scalable, ef
         circuits_final_df.write.mode("overwrite").format("delta").saveAsTable("f1_processed.circuits")
         ```
 
-   4) Similarly Ingested all other files using the same structure.
+    4) Similarly Ingested all other files using the same structure.
+
+      ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/ingest%20files%20for%20each%20notebook.JPG)
+
+    5) Wrote a single notebook to ingest all other ingestion notebook at once using dbutils.notebook.run command.
+       
+      ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/ingest%20all%20notebooks%20at%20once.JPG)
+
+3. Preparation of Transformation Phase :
+    
+    1)    
 
 
     
