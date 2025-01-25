@@ -1,4 +1,4 @@
-# Formula1 Race Project
+![image](https://github.com/user-attachments/assets/bfd9eef3-1682-4546-9b7c-3278e6dcfcec)# Formula1 Race Project
 
 ## Project Overview :
 This project aims to create an end-to-end data engineering solution for ingesting, processing and transforming Formula1 Race's data and providing a presentation layer for analysts to prepare reports out of the curated data. The key components of the project include:
@@ -237,6 +237,13 @@ This project showcases the integration of Azure services to build a scalable, ef
 
 5. Final Presentation layer data is created :
    ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/presentation%20layer.JPG)
+
+6. Tables created in Hive Metastore :
+   ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/presentation%20database%20in%20hive%20metastore.JPG)
+
+7. Power Connection & Reporting :
+   ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/connected%20to%20pbi.JPG)
+   ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/formula1%20pbi%20project.JPG)
     
                                     
        
