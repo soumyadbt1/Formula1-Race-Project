@@ -231,6 +231,8 @@ This project showcases the integration of Azure services to build a scalable, ef
       ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/pl_transformation.JPG)
       
      
+   3) Created execute pipeline tasks to execute both ingestion and transformation pipelines
+      ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/pipeline%20run%20of%20both%20ingestion%20%26%20transformation.JPG)
    
 
 
