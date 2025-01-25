@@ -250,7 +250,7 @@ This project showcases the integration of Azure services to build a scalable, ef
    
    ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/presentation%20database%20in%20hive%20metastore.JPG)
 
-9. Power Connection & Reporting :
+9. PowerBI Connection & Reporting :
     
    ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/connected%20to%20pbi.JPG)
    ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/formula1%20pbi%20project.JPG)
