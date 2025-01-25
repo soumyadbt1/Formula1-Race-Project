@@ -138,7 +138,14 @@ This project showcases the integration of Azure services to build a scalable, ef
        
       ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/ingest%20all%20notebooks%20at%20once.JPG)
 
-3. Transformation Phase :
+    6) Analysis to find the dominant drivers and teams, below is the code for it.
+       
+       https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Code/analysis/0.find_dominant_drivers.sql
+       https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Code/analysis/1.find_dominant_teams.sql
+       https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Code/analysis/3.viz_dominant_drivers.sql
+       https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Code/analysis/4.viz_dominant_teams.sql
+
+4. Transformation Phase :
     
     1) Joining circuits to races - 
       
@@ -236,14 +243,19 @@ This project showcases the integration of Azure services to build a scalable, ef
    
 
 5. Final Presentation layer data is created :
+   
    ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/presentation%20layer.JPG)
 
-6. Tables created in Hive Metastore :
+7. Tables created in Hive Metastore :
+   
    ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/presentation%20database%20in%20hive%20metastore.JPG)
 
-7. Power Connection & Reporting :
+9. Power Connection & Reporting :
+    
    ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/connected%20to%20pbi.JPG)
    ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/formula1%20pbi%20project.JPG)
+
+Thats all for this Project!! Thank You!!
     
                                     
        
