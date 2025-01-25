@@ -50,5 +50,22 @@ This project showcases the integration of Azure services to build a scalable, ef
 
 2. Preparation for Ingestion of data :
     
-    1) Created Mount Points in Databricks to Connect to ADLSg2 containers :
+    1) Created Mount Points in Databricks to Connect to ADLSg2 containers, below is the code and snapshots :
+       
+       https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Code/8.%20mount_adls_containers_for_project.ipynb
+
+       ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/function%20to%20mount%20fs.JPG)
+       ![a](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/mount%20raw%20container.JPG)
+    
+    2) Created variables as common configurations for mount points to be used within other notebooks by using run commands like below :
+       
+       ![a](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/config%20code.JPG)
+       ![b](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/run%20config.JPG)
+  
+       Used dbutils.widgets functionality to parameterize notebooks with inputs like "p_data_source" and "p_file_date":
+       
+       ![c](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/widgets.JPG)
+
+    3) 
+       
        
