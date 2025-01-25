@@ -44,7 +44,7 @@ This project showcases the integration of Azure services to build a scalable, ef
 ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/architecture.jpg)
 
 #### STEPS FOLLOWED : 
-1. First uploaded raw csv and json files to raw container, basically 3 folders each containing race details of history and particular dates.**
+1. First uploaded raw csv and json files to raw container, basically 3 folders each containing race details of history and particular dates.
    
    ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/raw_container_incremental_files.JPG)
 
