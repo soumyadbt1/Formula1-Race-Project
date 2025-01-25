@@ -41,3 +41,14 @@ This project aims to create an end-to-end data engineering solution for ingestin
 This project showcases the integration of Azure services to build a scalable, efficient data pipeline from data ingestion to visualization.
 
 ### Architecture Of Project : 
+![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/architecture.jpg)
+
+#### STEPS FOLLOWED : 
+1. First uploaded raw csv and json files to raw container, basically 3 folders each containing race details of history and particular dates.
+   
+   ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/raw_container_incremental_files.JPG)
+
+2. Preparation for Ingestion of data :
+    
+    1) Created Mount Points in Databricks to Connect to ADLSg2 containers :
+       
