@@ -138,7 +138,7 @@ This project showcases the integration of Azure services to build a scalable, ef
        
       ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/ingest%20all%20notebooks%20at%20once.JPG)
 
-3. Preparation of Transformation Phase :
+3. Transformation Phase :
     
     1) Joining circuits to races - 
       
@@ -220,6 +220,16 @@ This project showcases the integration of Azure services to build a scalable, ef
         VALUES (race_year, team_name, driver_id, driver_name, position, points, calculated_points, current_timestamp)
         """)
       ```
+4. Pipeline Orchestration for the entire Ingestion, Transformation and Loading Phases :
+
+   1) Ingestion of all files via ADF Pipeline (pl_ingest_formula1_data) :
+      ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/pl_ingest_f1_data_1.JPG)
+      ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/pl_ingest_f1_data_2_for_Each_loop.JPG)
+
+   2) Transformation ADF Pipeline (pl_transform_formula1_data) :
+      ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/pl_transform_formula1_data.JPG)
+      ![Image](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/pl_transformation.JPG)
+      
      
    
 
