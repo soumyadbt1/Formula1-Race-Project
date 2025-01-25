@@ -140,7 +140,88 @@ This project showcases the integration of Azure services to build a scalable, ef
 
 3. Preparation of Transformation Phase :
     
-    1)    
+    1) Joining circuits to races - 
+      
+          ```
+          race_circuits_df = races_df.join(circuits_df, races_df.circuit_id == circuits_df.circuit_id, "inner")\
+          .select(races_df.race_id,races_df.race_year,races_df.race_name, races_df.race_date, circuits_df.circuit_location)
+          ```
+   2) Join the results to all dataframes -
+      ```
+      race_results_df = results_df.join(race_circuits_df, results_df.results_race_id == race_circuits_df.race_id) \
+      .join(drivers_df, results_df.driver_id == drivers_df.driver_id) \
+      .join(constructors_df, results_df.constructor_id == constructors_df.constructor_Id)
+      ```
+      ```
+      final_df = race_results_df.select("race_id","race_year","race_name","race_date","circuit_location",
+      "driver_name","driver_number","driver_nationality","team","grid","fastest_lap","race_time","points","position","result_file_date") \
+      .withColumn("created_date", current_timestamp()) \
+      .withColumnRenamed("result_file_date", "file_date")
+      ```
+   3) Merged all data using a function to write the final curated data to presentation database tables.
+      ```
+      merge_condition = "tgt.driver_name = src.driver_name AND tgt.race_id = src.race_id"
+      merge_delta_table(final_df, 'f1_presentation', 'race_results', presentation_folder_path, merge_condition, 'race_id')
+      ```
+   4) For Driver Standing, below is the transformation code used :
+      ```
+      from pyspark.sql.functions import sum , when, col, count
+      driver_standing_df = race_results_df \
+      .groupBy("race_year","driver_name","driver_nationality") \
+      .agg(sum("points").alias("total_points"),
+      count(when(col("position") == 1, True)).alias("wins"))
+      ```
+
+      ```
+      from pyspark.sql.window import Window
+      from pyspark.sql.functions import desc, rank
+      
+      driver_rank_spec = Window.partitionBy("race_year").orderBy(desc("total_points"),desc("wins"))
+      final_df = driver_standing_df.withColumn("rank", rank().over(driver_rank_spec))
+
+  5) Similar Transformation steps are taken for Constructor Standings & Calculated Race Results. All the code for each are tagged below for reference.
+
+     https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Code/Trans/1.%20race_results.ipynb
+     https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Code/Trans/2.%20Driver%20Standings.ipynb
+     https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Code/Trans/3.%20Constructor%20Standings.ipynb
+     https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Code/Trans/4.%20Calculated%20Race%20Results.ipynb
+
+  6) Merge Python Function & SQL Code used to implement incremental data loading :
+
+     ```
+     ### Python Code :
+     def merge_delta_table(input_df, db_name, table_name, folder_path, merge_condition, partition_column):
+     spark.conf.set("spark.databricks.optimizer.dynamicPartitioning", "true")
+     from delta.tables import DeltaTable
+     if (spark._jsparkSession.catalog().tableExists(f"{db_name}.{table_name}")):
+         deltaTable = DeltaTable.forPath(spark, f"{folder_path}/{table_name}")
+         deltaTable.alias("tgt").merge(
+             input_df.alias("src"),
+             merge_condition)\
+             .whenMatchedUpdateAll()\
+             .whenNotMatchedInsertAll()\
+             .execute()
+     else:
+     input_df.write.mode("overwrite").partitionBy(partition_column).format("delta").saveAsTable(f"{db_name}.{table_name}")
+     ```
+     ```
+     ### SQL Code :
+     spark.sql(f"""
+        MERGE into f1_presentation.calculated_race_results tgt
+        USING race_results_updated upd
+        ON tgt.driver_id = upd.driver_id AND tgt.race_id = upd.race_id
+        WHEN MATCHED THEN
+        UPDATE SET tgt.position = upd.position,
+                    tgt.points = upd.points,
+                    tgt.calculated_points = upd.calculated_points,
+                    tgt.updated_date = current_timestamp
+        WHEN NOT MATCHED THEN
+        INSERT (race_year, team_name, driver_id, driver_name, position, points, calculated_points, created_date ) 
+        VALUES (race_year, team_name, driver_id, driver_name, position, points, calculated_points, current_timestamp)
+        """)
+      ```
+     
+   
 
 
     
