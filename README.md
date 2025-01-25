@@ -66,6 +66,70 @@ This project showcases the integration of Azure services to build a scalable, ef
        
        ![c](https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Snapshots/widgets.JPG)
 
-    3) 
+    3) Started Ingestion of data by writing schema code and reading the files from datalake.
+
+        https://github.com/soumyadbt1/Formula1-Race-Project/blob/main/Code/With%20Config%20Ingestion%20Process/1.ingest_circuits_file%20(w_config).ipynb
+    
+```
+## Creation of Processed and Presentation databases
+
+-- Databricks notebook source
+DROP DATABASE IF EXISTS f1_processed CASCADE;
+
+CREATE DATABASE IF NOT EXISTS f1_processed
+LOCATION "/mnt/formula1dlskm/processed";
+
+DROP DATABASE IF EXISTS f1_presentation CASCADE;
+
+CREATE DATABASE IF NOT EXISTS f1_presentation
+LOCATION "/mnt/formula1dlskm/presentation";
+
+```
+       
+```
+### Created Schema for the data to be ingested.
+#StuctType = Rows
+#StuctField = Columns
+circuits_schema = StructType(  fields=[StructField("circuitId", IntegerType(), False),
+                                     StructField("circuitRef", StringType(), True),
+                                     StructField("name",StringType(), True),
+                                     StructField("location", StringType(), True),	
+                                     StructField("country", StringType(), True),
+                                     StructField("lat", DoubleType(), True),
+                                     StructField("long", DoubleType(), True),
+                                     StructField("alt", IntegerType(), True),
+                                     StructField("url", StringType(), True)
+                                     ])
+```
+```
+## Read circuits.csv file using parameters and variables in the path and used the circuits schema defined above.
+circuits_df = spark.read \
+    .option("header",True) \
+        .schema (circuits_schema) \
+            .csv(f"{raw_folder_path}/{v_file_date}/circuits.csv")
+```
+```
+## Select only the required columns
+circuits_selected_df = circuits_df.select(col("circuitId"), col("circuitRef"), col("name"), col("location"), col("country"), col("lat"), col("long"), col("alt"))
+```
+```
+## Rename columns (with column renamed)
+circuits_renamed_df = circuits_selected_df.withColumnRenamed("circuitID", "circuit_id").withColumnRenamed("circuitRef", "circuit_ref") \
+.withColumnRenamed("lat", "latitude") \
+.withColumnRenamed("long", "longitude") \
+.withColumnRenamed("alt", "altitude") \
+.withColumn("data_source", lit(v_data_source)) \
+.withColumn("file_date", lit(v_file_date)) ## added this from widget
+```
+```
+## Added Ingestion Date
+circuits_final_df = add_ingestion_date(circuits_renamed_df)
+```
+```
+### wrote the data back to a table "circuits" in database "f1_processed" in delta format
+circuits_final_df.write.mode("overwrite").format("delta").saveAsTable("f1_processed.circuits")
+```
+
+                                    
        
        
